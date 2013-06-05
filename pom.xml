@@ -4,7 +4,7 @@
 
     <groupId>com.dynacrongroup</groupId>
     <artifactId>junit-webdriver</artifactId>
-    <version>0.0.0</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <fest-assert.version>2.0M10</fest-assert.version>
