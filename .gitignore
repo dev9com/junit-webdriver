@@ -1,2 +1,6 @@
 *.iml
 .idea
+target
+target/classes/com/dynacrongroup/webtest/conf/SauceLabsCredentials.class
+
+chromedriver.log
