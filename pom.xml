@@ -8,22 +8,20 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <fest-assert.version>2.0M10</fest-assert.version>
-        <logback.version>1.0.13</logback.version>
-        <selenium.version>2.33.0</selenium.version>
-        <jackson.version>2.2.1</jackson.version>
-        <junit.version>4.11</junit.version>
-        <mockito-core.version>1.9.5</mockito-core.version>
-        <slf4j.version>1.7.5</slf4j.version>
-
-        <sauce-rest.version>0.2</sauce-rest.version>
-        <config.version>1.0.0</config.version>
-        <phantomjs.version>1.0.1</phantomjs.version>
-        <operadriver.version>1.2</operadriver.version>
-
         <parallelrun>classes</parallelrun>
         <threadcount>5</threadcount>
+
+        <config.version>1.0.0</config.version>
+        <fest-assert.version>2.0M10</fest-assert.version>
+        <jackson.version>2.2.1</jackson.version>
+        <junit.version>4.11</junit.version>
+        <logback.version>1.0.13</logback.version>
+        <mockito-core.version>1.9.5</mockito-core.version>
+        <operadriver.version>1.2</operadriver.version>
+        <phantomjs.version>1.0.1</phantomjs.version>
+        <sauce-rest.version>0.2</sauce-rest.version>
+        <selenium.version>2.33.0</selenium.version>
+        <slf4j.version>1.7.5</slf4j.version>
     </properties>
 
     <prerequisites>
