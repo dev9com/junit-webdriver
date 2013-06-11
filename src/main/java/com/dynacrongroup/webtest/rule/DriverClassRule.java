@@ -20,7 +20,7 @@ import java.util.Set;
  * Date: 5/23/13
  * Time: 9:12 AM
  */
-public class DriverClassRule extends ExternalResource implements WebDriver {
+public class DriverClassRule extends ExternalResource implements WebDriver, HasInputDevices {
 
     private static final Logger LOG = LoggerFactory.getLogger(DriverClassRule.class);
 
@@ -157,6 +157,16 @@ public class DriverClassRule extends ExternalResource implements WebDriver {
         return getDriver().manage();
     }
 
+    @Override
+    public Keyboard getKeyboard() {
+        return ((HasInputDevices)getDriver()).getKeyboard();
+    }
+
+    @Override
+    public Mouse getMouse() {
+        return ((HasInputDevices)getDriver()).getMouse();
+    }
+
     public Boolean hasFailed() {
         return failed.get();
     }
@@ -268,5 +278,4 @@ public class DriverClassRule extends ExternalResource implements WebDriver {
             sauceREST.jobPassed(getJobId());
         }
     }
-
 }
