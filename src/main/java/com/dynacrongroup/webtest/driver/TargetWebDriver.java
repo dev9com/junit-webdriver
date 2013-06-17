@@ -167,7 +167,7 @@ public class TargetWebDriver {
     private DesiredCapabilities getCapabilitiesFrom(Config config) {
         DesiredCapabilities newCapabilities = buildDefaultCapabilities(config);
         if (config.hasPath(WEBDRIVER_CAPABILITIES_PATH)) {
-            newCapabilities = new DesiredCapabilities(config.getObject(WEBDRIVER_CAPABILITIES_PATH).unwrapped());
+            newCapabilities.merge(new DesiredCapabilities(config.getObject(WEBDRIVER_CAPABILITIES_PATH).unwrapped()));
         }
         return newCapabilities;
     }
