@@ -20,7 +20,7 @@ import java.util.Set;
  * Date: 5/23/13
  * Time: 9:12 AM
  */
-public class DriverClassRule extends ExternalResource implements WebDriver, HasInputDevices {
+public class DriverClassRule extends ExternalResource implements WebDriver, JavascriptExecutor, HasInputDevices {
 
     private static final Logger LOG = LoggerFactory.getLogger(DriverClassRule.class);
 
@@ -167,6 +167,17 @@ public class DriverClassRule extends ExternalResource implements WebDriver, HasI
         return ((HasInputDevices)getDriver()).getMouse();
     }
 
+
+    @Override
+    public Object executeScript(String s, Object... objects) {
+        return ((JavascriptExecutor)getDriver()).executeScript(s, objects);
+    }
+
+    @Override
+    public Object executeAsyncScript(String s, Object... objects) {
+        return ((JavascriptExecutor)getDriver()).executeAsyncScript(s, objects);
+    }
+
     public Boolean hasFailed() {
         return failed.get();
     }
@@ -182,9 +193,12 @@ public class DriverClassRule extends ExternalResource implements WebDriver, HasI
         return jobUrl;
     }
 
-    @VisibleForTesting
     public String getJobId() {
         return jobId.get();
+    }
+
+    public TargetWebDriver getTargetWebDriver() {
+        return targetWebDriver.get();
     }
 
     @VisibleForTesting
@@ -221,11 +235,6 @@ public class DriverClassRule extends ExternalResource implements WebDriver, HasI
     @VisibleForTesting
     protected void setTargetWebDriver(TargetWebDriver target) {
         targetWebDriver.set(target);
-    }
-
-    @VisibleForTesting
-    protected TargetWebDriver getTargetWebDriver() {
-        return targetWebDriver.get();
     }
 
     @VisibleForTesting
