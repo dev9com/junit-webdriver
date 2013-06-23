@@ -3,6 +3,7 @@ package com.dynacrongroup.webtest.sample;
 import com.dynacrongroup.webtest.rule.DriverClassRule;
 import com.dynacrongroup.webtest.rule.DriverMethodRule;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -30,6 +31,7 @@ public class PairingSampleIT {
     public DriverMethodRule rule = new DriverMethodRule(driver);
 
     @Test
+    @Ignore("used as a sample only")
     public void searchForCat() throws InterruptedException {
         String searchTerm = "cat";
         searchFor(searchTerm);
