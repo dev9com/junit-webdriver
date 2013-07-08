@@ -15,7 +15,7 @@
     <!-- By default, HTMLUnit will complain about a LOT of CSS rules. Set to
          WARN or disable to see these warnings. -->
     <logger name="com.gargoylesoftware.htmlunit"
-            level="ERROR" />
+            level="OFF" />
 
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
