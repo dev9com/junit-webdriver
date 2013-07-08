@@ -78,7 +78,7 @@ public class SauceLabsCredentials {
 
 
     private static String safelyGetConfigString(Config config, String path) {
-        if (!config.hasPath(path)) {
+        if (!config.hasPath(path) || config.getString(path).isEmpty()) {
             String message = String.format("Config value %s missing - required for Sauce Labs connection.", path);
             throw new RuntimeException(message);
         }

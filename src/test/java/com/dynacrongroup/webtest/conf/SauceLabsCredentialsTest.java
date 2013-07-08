@@ -1,11 +1,15 @@
 package com.dynacrongroup.webtest.conf;
 
 import com.typesafe.config.Config;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.net.URL;
 
 import static org.fest.assertions.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.hamcrest.Matchers.*;
 
 /**
  * User: yurodivuie
@@ -18,6 +22,13 @@ public class SauceLabsCredentialsTest {
     String expectedUser = config.getString(SauceLabsCredentials.SAUCELABS_USER_PATH);
     String expectedKey = config.getString(SauceLabsCredentials.SAUCELABS_KEY_PATH);
     String expectedServer = config.getString(SauceLabsCredentials.SAUCELABS_SERVER_PATH);
+
+    private class MissingSauceLabsCredentials {
+
+    }
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     @Test
     public void testGetUser() throws Exception {
@@ -48,6 +59,23 @@ public class SauceLabsCredentialsTest {
                 containsIgnoringCase(expectedServer).
                 containsIgnoringCase(expectedUser).
                 containsIgnoringCase(expectedKey);
+    }
+
+    @Test
+    public void missingCredentialPath() {
+        Config config = mock(Config.class);
+        exception.expect(RuntimeException.class);
+        exception.expectMessage(containsString("required for Sauce Labs connection"));
+        SauceLabsCredentials.getConnectionLocation(config);
+    }
+
+
+    @Test
+    public void missingCredential() {
+        Config config = WebtestConfigFactory.getConfig(MissingSauceLabsCredentials.class);
+        exception.expect(RuntimeException.class);
+        exception.expectMessage(containsString("saucelabs.user"));
+        SauceLabsCredentials.getConnectionLocation(config);
     }
 
 }

@@ -150,6 +150,13 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <artifactId>hamcrest-all</artifactId>
+            <groupId>org.hamcrest</groupId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
