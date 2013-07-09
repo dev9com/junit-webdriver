@@ -22,7 +22,9 @@ public class TargetWebDriverTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     private class TargetWebDriverTestBadPlatform {}
-    private class TargetWebDriverTestGoodPlatform {}
+    private class TargetWebDriverTestBadBrowser {}
+    private class TargetWebDriverTestBadType {}
+    private class TargetWebDriverTestGoodData {}
 
     @Test
     public void badPlatform() {
@@ -31,8 +33,20 @@ public class TargetWebDriverTest {
     }
 
     @Test
-    public void goodPlatform() {
-        TargetWebDriver targetWebDriver = new TargetWebDriver(TargetWebDriverTestGoodPlatform.class);
+    public void badBrowser() {
+        expectedException.expect(IllegalArgumentException.class);
+        new TargetWebDriver(TargetWebDriverTestBadBrowser.class);
+    }
+
+    @Test
+    public void badType() {
+        expectedException.expect(IllegalArgumentException.class);
+        new TargetWebDriver(TargetWebDriverTestBadType.class);
+    }
+
+    @Test
+    public void goodData() {
+        TargetWebDriver targetWebDriver = new TargetWebDriver(TargetWebDriverTestGoodData.class);
         assertThat(targetWebDriver.getPlatform()).isEqualTo(Platform.WINDOWS);
     }
 

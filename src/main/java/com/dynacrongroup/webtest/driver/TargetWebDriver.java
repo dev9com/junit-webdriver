@@ -5,6 +5,7 @@ import com.dynacrongroup.webtest.conf.WebtestConfigFactory;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Throwables;
 import com.typesafe.config.Config;
+import org.apache.commons.lang3.ArrayUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -121,7 +122,7 @@ public class TargetWebDriver {
     }
 
     public WebDriver build() {
-        WebDriver driver = null;
+        WebDriver driver;
         if (isLocal()) {
             driver = buildLocal();
         }
@@ -149,11 +150,27 @@ public class TargetWebDriver {
     }
 
     private Browser getBrowserFrom(Config config) {
-        return Browser.fromJson(config.getString(WEBDRIVER_BROWSER_PATH));
+        Browser result;
+        try {
+            result = Browser.fromJson(config.getString(WEBDRIVER_BROWSER_PATH));
+        }
+        catch (IllegalArgumentException ex) {
+            LOG.error("Invalid browser.  Must be one of {}", ArrayUtils.toString(Browser.values()));
+            throw ex;
+        }
+        return result;
     }
 
     private Type getTypeFrom(Config config) {
-        return Type.fromJson(config.getString(WEBDRIVER_TYPE_PATH));
+        Type result;
+        try {
+            result = Type.fromJson(config.getString(WEBDRIVER_TYPE_PATH));
+        }
+        catch (IllegalArgumentException ex) {
+            LOG.error("Invalid type.  Must be one of {}", ArrayUtils.toString(Type.values()));
+            throw ex;
+        }
+        return result;
     }
 
     private String getVersionFrom(Config config) {
@@ -161,7 +178,15 @@ public class TargetWebDriver {
     }
 
     private Platform getPlatformFrom(Config config) {
-        return Platform.valueOf(config.getString(WEBDRIVER_PLATFORM_PATH).toUpperCase());
+        Platform result;
+        try {
+            result = Platform.valueOf(config.getString(WEBDRIVER_PLATFORM_PATH).toUpperCase());
+        }
+        catch (IllegalArgumentException ex) {
+            LOG.error("Invalid platform.  Must be one of {}", ArrayUtils.toString(Platform.values()));
+            throw ex;
+        }
+        return result;
     }
 
     private DesiredCapabilities getCapabilitiesFrom(Config config) {
