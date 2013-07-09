@@ -35,7 +35,7 @@ public class DriverClassRule extends ExternalResource implements WebDriver, Java
     private static ThreadLocal<TargetWebDriver> targetWebDriver = new ThreadLocal<TargetWebDriver>();
     private static ThreadLocal<String> jobId = new ThreadLocal<String>();
 
-    private SauceREST sauceREST = new SauceREST(SauceLabsCredentials.getUser(), SauceLabsCredentials.getKey());
+    private SauceREST sauceREST;
 
     public DriverClassRule() {
     }
@@ -205,6 +205,7 @@ public class DriverClassRule extends ExternalResource implements WebDriver, Java
     protected void initialize(Class testClass) {
         setTestClass(testClass);
         setTargetWebDriver(new TargetWebDriver(testClass));
+        setSauceREST();
     }
 
     @VisibleForTesting
@@ -252,6 +253,12 @@ public class DriverClassRule extends ExternalResource implements WebDriver, Java
         setDriver(getTargetWebDriver().build());
         recordJobId();
         reportURL();
+    }
+
+    private void setSauceREST() {
+        if (getTargetWebDriver().isRemote()) {
+            sauceREST = new SauceREST(SauceLabsCredentials.getUser(), SauceLabsCredentials.getKey());
+        }
     }
 
     private void recordJobId() {
