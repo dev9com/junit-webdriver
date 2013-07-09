@@ -13,9 +13,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
  */
 public class WebtestConfigFactoryTest {
 
-    private class WithProfile {
-
-    }
+    private class WithProfile {}
 
     @Test
     public void testGetConfig() throws Exception {
@@ -44,7 +42,6 @@ public class WebtestConfigFactoryTest {
         assertThat(config.getInt("test1")).isEqualTo(1);
         assertThat(config.hasPath("test2")).isFalse();
         assertThat(config.getInt("test3")).isEqualTo(3);
-
     }
 
 
