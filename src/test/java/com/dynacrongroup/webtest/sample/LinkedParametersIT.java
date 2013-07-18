@@ -17,6 +17,7 @@ import java.util.Collection;
 
 import static java.lang.String.format;
 import static org.fest.assertions.api.Assertions.assertThat;
+import static org.junit.Assume.assumeTrue;
 
 /**
  * User: yurodivuie
@@ -58,6 +59,7 @@ public class LinkedParametersIT {
 
     @Test
     public void verifyLatinName() {
+        assumeTrue(driver.getTargetWebDriver().isRemote());
         String url = format("http://%s.wikipedia.org/wiki/%s", languageCode, localizedCat);
         LOG.info("Test url: {}", url);
         driver.get(url);

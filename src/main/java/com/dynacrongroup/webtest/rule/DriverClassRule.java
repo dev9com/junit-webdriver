@@ -3,12 +3,12 @@ package com.dynacrongroup.webtest.rule;
 import com.dynacrongroup.webtest.conf.SauceLabsCredentials;
 import com.dynacrongroup.webtest.driver.TargetWebDriver;
 import com.dynacrongroup.webtest.sauce.SauceREST;
+import com.dynacrongroup.webtest.util.SauceUtils;
 import com.google.common.annotations.VisibleForTesting;
 import org.junit.rules.ExternalResource;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 import org.openqa.selenium.*;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +33,6 @@ public class DriverClassRule extends ExternalResource implements WebDriver, Java
     private static ThreadLocal<Boolean> failed = new ThreadLocal<Boolean>();
     private static ThreadLocal<Class> testClass = new ThreadLocal<Class>();
     private static ThreadLocal<TargetWebDriver> targetWebDriver = new ThreadLocal<TargetWebDriver>();
-    private static ThreadLocal<String> jobId = new ThreadLocal<String>();
 
     private SauceREST sauceREST;
 
@@ -83,13 +82,7 @@ public class DriverClassRule extends ExternalResource implements WebDriver, Java
     }
 
     public void logInContext(String s) {
-        if (getTargetWebDriver().isRemote()) {
-            try {
-                ((JavascriptExecutor) getDriver()).executeScript("sauce:context=// " + s);
-            } catch (WebDriverException exception) {
-                LOG.warn("Failed to update sauce labs context: {}", exception.getMessage());
-            }
-        }
+        SauceUtils.logInContext(getDriver(), s);
     }
 
     @Override
@@ -159,23 +152,23 @@ public class DriverClassRule extends ExternalResource implements WebDriver, Java
 
     @Override
     public Keyboard getKeyboard() {
-        return ((HasInputDevices)getDriver()).getKeyboard();
+        return ((HasInputDevices) getDriver()).getKeyboard();
     }
 
     @Override
     public Mouse getMouse() {
-        return ((HasInputDevices)getDriver()).getMouse();
+        return ((HasInputDevices) getDriver()).getMouse();
     }
 
 
     @Override
     public Object executeScript(String s, Object... objects) {
-        return ((JavascriptExecutor)getDriver()).executeScript(s, objects);
+        return ((JavascriptExecutor) getDriver()).executeScript(s, objects);
     }
 
     @Override
     public Object executeAsyncScript(String s, Object... objects) {
-        return ((JavascriptExecutor)getDriver()).executeAsyncScript(s, objects);
+        return ((JavascriptExecutor) getDriver()).executeAsyncScript(s, objects);
     }
 
     public Boolean hasFailed() {
@@ -183,18 +176,11 @@ public class DriverClassRule extends ExternalResource implements WebDriver, Java
     }
 
     public String getJobUrl() {
-        String jobUrl = null;
-        if (getTargetWebDriver().isRemote()) {
-            jobUrl = String.format("https://saucelabs.com/jobs/%s", getJobId());
-        }
-        else {
-            jobUrl = "Local driver: request for jobUrl is inapplicable";
-        }
-        return jobUrl;
+        return SauceUtils.getJobUrl(getDriver());
     }
 
     public String getJobId() {
-        return jobId.get();
+        return SauceUtils.getJobId(getDriver());
     }
 
     public TargetWebDriver getTargetWebDriver() {
@@ -212,7 +198,7 @@ public class DriverClassRule extends ExternalResource implements WebDriver, Java
     protected void setFailed(Boolean hasFailed) {
         failed.set(hasFailed);
     }
-    
+
     @VisibleForTesting
     protected WebDriver getDriver() {
         return driver.get();
@@ -220,7 +206,7 @@ public class DriverClassRule extends ExternalResource implements WebDriver, Java
 
     @VisibleForTesting
     protected void setDriver(WebDriver newDriver) {
-       driver.set(newDriver);
+        driver.set(newDriver);
     }
 
     @VisibleForTesting
@@ -239,11 +225,6 @@ public class DriverClassRule extends ExternalResource implements WebDriver, Java
     }
 
     @VisibleForTesting
-    protected void setJobId(String newJobId) {
-        jobId.set(newJobId);
-    }
-
-    @VisibleForTesting
     protected void reportFailure() {
         failed.set(true);
     }
@@ -251,7 +232,6 @@ public class DriverClassRule extends ExternalResource implements WebDriver, Java
     @VisibleForTesting
     protected void buildDriver() {
         setDriver(getTargetWebDriver().build());
-        recordJobId();
         reportURL();
     }
 
@@ -259,14 +239,6 @@ public class DriverClassRule extends ExternalResource implements WebDriver, Java
         if (getTargetWebDriver().isRemote()) {
             sauceREST = new SauceREST(SauceLabsCredentials.getUser(), SauceLabsCredentials.getKey());
         }
-    }
-
-    private void recordJobId() {
-        String newJobId = "";
-        if (getTargetWebDriver().isRemote() && getDriver() != null) {
-            newJobId = ((RemoteWebDriver) getDriver()).getSessionId().toString();
-        }
-        setJobId(newJobId);
     }
 
     private void reportURL() {
@@ -280,17 +252,15 @@ public class DriverClassRule extends ExternalResource implements WebDriver, Java
         try {
             getDriver().quit();
             setDriver(null);
-        }
-        catch (WebDriverException exception) {
+        } catch (WebDriverException exception) {
             LOG.warn("Exception while quitting driver during driver rebuild.", exception);
         }
     }
 
     private void reportFinalStatus() {
-        if ( hasFailed() ) {
+        if (hasFailed()) {
             sauceREST.jobFailed(getJobId());
-        }
-        else {
+        } else {
             sauceREST.jobPassed(getJobId());
         }
     }
