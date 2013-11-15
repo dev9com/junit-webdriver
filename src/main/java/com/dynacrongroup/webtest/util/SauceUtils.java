@@ -4,6 +4,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.SessionId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +34,10 @@ public class SauceUtils {
     public static String getJobId(WebDriver driver) {
         String jobId = null;
         if (driver instanceof RemoteWebDriver) {
-            jobId = ((RemoteWebDriver) driver).getSessionId().toString();
+            final SessionId rawSessionId = ((RemoteWebDriver) driver).getSessionId();
+            if (rawSessionId != null) {
+                jobId = rawSessionId.toString();
+            }
         }
         return jobId;
     }
