@@ -4,23 +4,24 @@
 
     <groupId>com.dynacrongroup</groupId>
     <artifactId>junit-webdriver</artifactId>
-    <version>0.0.9-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <parallelrun>classes</parallelrun>
         <threadcount>5</threadcount>
 
-        <config.version>1.0.0</config.version>
+        <config.version>1.0.2</config.version>
         <fest-assert.version>2.0M10</fest-assert.version>
         <jackson.version>2.2.1</jackson.version>
         <junit.version>4.11</junit.version>
         <logback.version>1.0.13</logback.version>
         <mockito-core.version>1.9.5</mockito-core.version>
-        <operadriver.version>1.2</operadriver.version>
+        <operadriver.version>1.5</operadriver.version>
         <phantomjs.version>1.0.1</phantomjs.version>
-        <sauce-rest.version>0.2</sauce-rest.version>
-        <selenium.version>2.33.0</selenium.version>
+        <sauce-rest.version>0.3</sauce-rest.version>
+        <selenium.version>2.38.0</selenium.version>
         <slf4j.version>1.7.5</slf4j.version>
     </properties>
 
@@ -199,7 +200,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.13</version>
+                <version>2.15</version>
                 <configuration>
                     <parallel>${parallelrun}</parallel>
                     <threadCount>${threadcount}</threadCount>
@@ -210,7 +211,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.13</version>
+                <version>2.14.1</version>
                 <configuration>
                     <parallel>${parallelrun}</parallel>
                     <threadCount>${threadcount}</threadCount>

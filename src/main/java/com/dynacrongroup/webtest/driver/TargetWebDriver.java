@@ -136,7 +136,8 @@ public class TargetWebDriver {
         WebDriver driver = null;
         try {
             LOG.debug("building {} for {}", browser.getDriverClass(), getTestClass());
-            Constructor constructor = browser.getDriverClass().getDeclaredConstructor(Capabilities.class);
+            final Class<?> driverClass = browser.getDriverClass();
+            Constructor constructor = driverClass.getDeclaredConstructor(Capabilities.class);
             driver = (WebDriver) constructor.newInstance(getCapabilities());
         } catch (Exception ex) {
             Throwables.propagate(ex);
