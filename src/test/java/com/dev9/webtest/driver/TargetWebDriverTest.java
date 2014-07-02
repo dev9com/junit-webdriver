@@ -1,4 +1,4 @@
-package com.dynacrongroup.webtest.driver;
+package com.dev9.webtest.driver;
 
 import org.junit.Rule;
 import org.junit.Test;

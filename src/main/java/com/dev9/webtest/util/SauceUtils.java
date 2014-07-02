@@ -1,4 +1,4 @@
-package com.dynacrongroup.webtest.util;
+package com.dev9.webtest.util;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

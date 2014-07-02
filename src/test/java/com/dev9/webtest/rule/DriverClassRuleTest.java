@@ -1,4 +1,4 @@
-package com.dynacrongroup.webtest.rule;
+package com.dev9.webtest.rule;
 
 
 import org.junit.After;

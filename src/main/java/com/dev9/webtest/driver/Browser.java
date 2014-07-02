@@ -1,4 +1,4 @@
-package com.dynacrongroup.webtest.driver;
+package com.dev9.webtest.driver;
 
 import com.opera.core.systems.OperaDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;

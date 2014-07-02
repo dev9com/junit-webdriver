@@ -1,7 +1,7 @@
-package com.dynacrongroup.webtest.sample;
+package com.dev9.webtest.sample;
 
-import com.dynacrongroup.webtest.rule.DriverClassRule;
-import com.dynacrongroup.webtest.rule.DriverMethodRule;
+import com.dev9.webtest.rule.DriverClassRule;
+import com.dev9.webtest.rule.DriverMethodRule;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;

@@ -30,13 +30,13 @@ To add the dependency to your project, use the following in your pom.xml:
     <repositories>
         <repository>
             <id>cloudbees</id>
-            <url>https://repository-dynacrongroup.forge.cloudbees.com/release/</url>
+            <url>https://repository-dev9.forge.cloudbees.com/release/</url>
         </repository>
         ...
     </repositories>
     <dependencies>
         <dependency>
-            <groupId>com.dynacrongroup</groupId>
+            <groupId>com.dev9</groupId>
             <artifactId>junit-webdriver</artifactId>
             <version>0.0.1</version>
         </dependency>
@@ -94,7 +94,7 @@ Sauce Labs, which should be initialized with the DriverClassRule.
     public DriverMethodRule rule = new DriverMethodRule(driver);
 ````
 
-See com.dynacrongroup.webtest.rule.DriverClassRuleIT for an example of usage.
+See com.dev9.webtest.rule.DriverClassRuleIT for an example of usage.
 
 
 Roadmap

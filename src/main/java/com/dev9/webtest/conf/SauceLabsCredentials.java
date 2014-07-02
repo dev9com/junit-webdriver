@@ -1,4 +1,4 @@
-package com.dynacrongroup.webtest.conf;
+package com.dev9.webtest.conf;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.typesafe.config.Config;

@@ -1,7 +1,7 @@
-package com.dynacrongroup.webtest.driver;
+package com.dev9.webtest.driver;
 
-import com.dynacrongroup.webtest.conf.SauceLabsCredentials;
-import com.dynacrongroup.webtest.conf.WebtestConfigFactory;
+import com.dev9.webtest.conf.SauceLabsCredentials;
+import com.dev9.webtest.conf.WebtestConfigFactory;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Throwables;
 import com.typesafe.config.Config;

@@ -1,9 +1,9 @@
-package com.dynacrongroup.webtest.rule;
+package com.dev9.webtest.rule;
 
-import com.dynacrongroup.webtest.conf.SauceLabsCredentials;
-import com.dynacrongroup.webtest.driver.TargetWebDriver;
-import com.dynacrongroup.webtest.sauce.SauceREST;
-import com.dynacrongroup.webtest.util.SauceUtils;
+import com.dev9.webtest.conf.SauceLabsCredentials;
+import com.dev9.webtest.driver.TargetWebDriver;
+import com.dev9.webtest.sauce.SauceREST;
+import com.dev9.webtest.util.SauceUtils;
 import com.google.common.annotations.VisibleForTesting;
 import org.junit.rules.ExternalResource;
 import org.junit.runner.Description;

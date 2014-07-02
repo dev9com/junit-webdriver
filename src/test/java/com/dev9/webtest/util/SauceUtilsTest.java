@@ -1,4 +1,4 @@
-package com.dynacrongroup.webtest.util;
+package com.dev9.webtest.util;
 
 import org.junit.Ignore;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.dynacrongroup.webtest.rule;
+package com.dev9.webtest.rule;
 
 import com.google.common.annotations.VisibleForTesting;
 import org.junit.internal.AssumptionViolatedException;

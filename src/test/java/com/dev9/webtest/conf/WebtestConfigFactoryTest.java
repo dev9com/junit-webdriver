@@ -1,4 +1,4 @@
-package com.dynacrongroup.webtest.conf;
+package com.dev9.webtest.conf;
 
 import com.typesafe.config.Config;
 import org.junit.Test;
