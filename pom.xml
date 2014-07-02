@@ -4,7 +4,7 @@
 
     <groupId>com.dev9</groupId>
     <artifactId>junit-webdriver</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -46,7 +46,7 @@
         <connection>scm:git:git@github.com:dev9com/${project.artifactId}.git</connection>
         <developerConnection>scm:git:git@github.com:dev9com/${project.artifactId}.git</developerConnection>
         <url>scm:git:git@github.com:dev9com/${project.artifactId}.git</url>
-      <tag>junit-webdriver-1.0.2</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <repositories>
