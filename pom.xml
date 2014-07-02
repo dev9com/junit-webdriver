@@ -53,7 +53,7 @@
         <repository>
             <id>dev9-repository</id>
             <name>dev9 repository</name>
-            <url>https://repository-dev9.forge.cloudbees.com/release</url>
+            <url>http://repository-dev9.forge.cloudbees.com/release</url>
         </repository>
     </repositories>
 
