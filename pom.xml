@@ -21,7 +21,7 @@
         <operadriver.version>1.5</operadriver.version>
         <phantomjs.version>1.0.1</phantomjs.version>
         <sauce-rest.version>1.0.2</sauce-rest.version>
-        <selenium.version>2.38.0</selenium.version>
+        <selenium.version>2.44.0</selenium.version>
         <slf4j.version>1.7.5</slf4j.version>
     </properties>
 
